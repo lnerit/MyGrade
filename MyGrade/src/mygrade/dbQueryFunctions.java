@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 public class dbQueryFunctions {
 	static dbConnection conn=new dbConnection();
 	static Connection c=conn.dbConn();
+	
     public String ExecuteScalarQuery(String sqlString)
     {
        try{
@@ -36,13 +37,15 @@ public class dbQueryFunctions {
 		}
 		return null;
     }
+    
     public void ExecuteNonQuerySql(String sqlString)
     {
-        
         try
         {
            Statement statement=c.createStatement();
-           ResultSet  rs=statement.executeQuery(sqlString);  
+           statement.executeQuery(sqlString);  
+           
+           
         }
         catch (Exception s)
         {

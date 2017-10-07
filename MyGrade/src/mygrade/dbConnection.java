@@ -1,4 +1,8 @@
-
+/*
+ * Author: Lenz L Nerit
+ * Date:07/10/2017
+ * Description: Database connection class
+ */
 package mygrade;
 import java.sql.*;
 import java.io.*;
