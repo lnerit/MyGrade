@@ -20,7 +20,6 @@ public class Grade {
 	private int Year=0,Semester=0;
 	
 	private int Points=0,Level=0;
-
 	dbConnection dbCon=new dbConnection();
 	Connection c=dbCon.dbConn();
 	
@@ -81,9 +80,8 @@ public class Grade {
 		}
 		private void UpdateGradeRecord(String StudentId,String CourseCode,int Year,int Semester,String Grade) {
 			try {
-			
 				String sqlString="UPDATE Grade SET YearOfStudy=?,Semester=?,Grade=? WHERE CourseCode=? AND StudentId=?";
-				//if(c!=null) {
+				
 					PreparedStatement s=c.prepareStatement(sqlString,Statement.RETURN_GENERATED_KEYS);
 					s.setString(5, StudentId);
 					s.setString(4, CourseCode);
@@ -97,7 +95,7 @@ public class Grade {
 					}else {
 						System.out.println("Grade Record UPDATE UNSUCCESSFUL");
 					}
-				//}
+				
 				 
 			}catch(Exception e) {
 				System.out.println(e.getMessage());
@@ -113,7 +111,6 @@ public class Grade {
 		}
 		private void DeleteGradeRecord(String StudentId,String CourseCode) {
 			try {
-			
 				String sqlString="DELETE FROM Grade WHERE StudentId=? AND CourseCode=?";
 				if(c!=null) {
 					PreparedStatement s=c.prepareStatement(sqlString);
@@ -122,7 +119,7 @@ public class Grade {
 					boolean r=s.execute();
 					int status=s.getUpdateCount();
 					if(status>0) {
-						System.out.println("Course Record ["+CourseCode +"] DELETED SUCCESSFULLY...");
+						System.out.println("Grade Record ["+StudentId+"-->"+CourseCode +"] DELETED SUCCESSFULLY...");
 					}else {
 						System.out.println("DELETE OPERATION UNSUCCESSFUL...");
 					}
@@ -152,11 +149,10 @@ public class Grade {
 				}
 				s = c.createStatement();
 				ResultSet rs=s.executeQuery(sqlStr);
-				System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-				//System.out.println("StudentId\tCourse Code\tYear\tSemester\tGrade");
-				// System.out.println("-----------------------------------------------------------");
+				
 				 String[] sx= {"Student ID","Course Code","Year","Semester","Grade"};
 				 StringBuilder sb=new StringBuilder();
+				 sb.append("--------------------------------------------------------------------\n");
 				 for(int x=0;x<5;x++) {
 					 sb.append(String.format("| %-10s",sx[x]));
 				 }
@@ -165,13 +161,13 @@ public class Grade {
 				while(rs.next()) {
 					for(int i=1;i<=5;i++) {
 						sb.append(String.format("| %-10s", rs.getString(i).trim()));
-						//System.out.println(rs.getString(1)+"\t\t"+rs.getString(2)+"\t\t\t\t"+rs.getString(3));
 					}
 					sb.append("\n");
-					//System.out.println(rs.getString(1)+"\t"+rs.getString(2)+"\t\t"+rs.getString(3)+"\t\t"+rs.getString(4)+"\t"+rs.getString(5));
+
 				}
+				 sb.append("--------------------------------------------------------------------\n");
 				System.out.println(sb.toString());
-				 System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+			
 			} catch (SQLException e) {
 				System.out.print("Error occured while retrieving student records...Please try again!"+e.getMessage());
 			}finally {

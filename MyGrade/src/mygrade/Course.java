@@ -147,11 +147,10 @@ public class Course {
 				}
 				s = c.createStatement();
 				ResultSet rs=s.executeQuery(sqlStr);
-				System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-				//System.out.println("Course Code\tCourse Name\tPoints");
-				// System.out.println("-----------------------------------------------------------");
+				
 				 String[] sx= {"Course Code","Course Name","Points"};
 				 StringBuilder sb=new StringBuilder();
+				 sb.append("--------------------------------------------------------------------\n");
 				 for(int x=0;x<3;x++) {
 					 sb.append(String.format("| %-10s",sx[x]));
 				 }
@@ -164,8 +163,9 @@ public class Course {
 					}
 					sb.append("\n");
 				}
+				 sb.append("--------------------------------------------------------------------\n");
 				 System.out.println(sb.toString()+"\n");
-				 System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
 			} catch (SQLException e) {
 				System.out.print("Error occured while retrieving student records...Please try again!"+e.getMessage());
 			}finally {

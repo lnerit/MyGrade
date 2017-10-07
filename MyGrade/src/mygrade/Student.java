@@ -123,6 +123,7 @@ public class Student {
 			}
 		}
 	}
+	
 	private void getStudentRecord() {
 		String sqlStr="SELECT * FROM Student ORDER BY FirstName";
 		
@@ -133,26 +134,24 @@ public class Student {
 			}
 			s = c.createStatement();
 			ResultSet rs=s.executeQuery(sqlStr);
-			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-			//System.out.println("Student ID\tFirstName\tLastName\tMajor");
-			 //System.out.println("-----------------------------------------------------------");
+			
 			 String[] sx= {"Student ID","First Name","Last Name","Major"};
 			 StringBuilder sb=new StringBuilder();
+			 sb.append("--------------------------------------------------------------------\n");
 			 for(int x=0;x<4;x++) {
 				 sb.append(String.format("| %-10s",sx[x]));
 			 }
 			 sb.append("\n");
 			 sb.append("--------------------------------------------------------------------\n");
 			while(rs.next()) {
-				//System.out.println(rs.getString(1)+"\t\t"+rs.getString(2)+"\t\t"+rs.getString(3)+"\t\t"+rs.getString(4));
 				for(int i=1;i<=4;i++) {
 					sb.append(String.format("| %-10s", rs.getString(i).trim()));
-					//System.out.println(rs.getString(1)+"\t\t"+rs.getString(2)+"\t\t\t\t"+rs.getString(3));
 				}
 				sb.append("\n");
 			}
+			 sb.append("--------------------------------------------------------------------\n");
 			 System.out.println(sb.toString());
-			 System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
 		} catch (SQLException e) {
 			System.out.print("Error occured while retrieving student records...Please try again!"+e.getMessage());
 		}finally {

@@ -15,16 +15,37 @@ import javax.swing.JOptionPane;
 public class dbQueryFunctions {
 	static dbConnection conn=new dbConnection();
 	static Connection c=conn.dbConn();
+
+	public static boolean isRecordExist(String sqlString,String parameter) {
+		try {
+			if(c.isClosed()) {
+				c=conn.dbConn();
+			}
+			String s =sqlString;
+			PreparedStatement stmt=c.prepareStatement(s);
+			stmt.setString(1, parameter);
+			ResultSet rs=stmt.executeQuery();
+			if(rs.next() && rs.getInt(1)>0) {
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			System.out.print("Error occured...try again");
+		}
+		
+		return false;
+	}
 	
-    public String ExecuteScalarQuery(String sqlString)
+    public static String ExecuteScalarQuery(String sqlString)
     {
        try{
             Statement statement=c.createStatement();
             ResultSet rs=statement.executeQuery(sqlString);
-                    //string returnStr = cmd.ExecuteScalar().ToString();
-                    String returnStr = (rs.getString(1) == null) ? "" : rs.getString(1);
-                    return returnStr;
-            
+            String returnStr="";
+            while(rs.next()){
+                    returnStr = (rs.getString(1) == null) ? "" : rs.getString(1);
+            }
+            return returnStr;
         }
         catch (Exception s)
         {
@@ -32,6 +53,38 @@ public class dbQueryFunctions {
         }
         
         return "";
+    }
+    public static void getSpecificStudentGrades(String studentId) {
+    	try {
+    	String s=" SELECT CourseCode,YearOfStudy as [Year],Semester,Grade FROM Grade WHERE StudentId=?";
+    	String sname=" SELECT FirstName + ' ' + LastName + ' [ '+'"+studentId+"'+' ]' FROM Student WHERE StudentId='"+studentId+"'";
+    	String studentName=ExecuteScalarQuery(sname);
+    	
+    	 String[] sx= {"Course Code","Year","Semester","Grade"};
+    	StringBuilder sb=new StringBuilder();
+    	sb.append("--------------------------------------------------------------------\n");
+    	sb.append("Student Name: "+studentName+"\n");
+    	 sb.append("--------------------------------------------------------------------\n");
+    	 for(int x=0;x<4;x++) {
+			 sb.append(String.format("| %-10s",sx[x]));
+		 }
+    	 sb.append("\n");
+    	 sb.append("--------------------------------------------------------------------\n");
+    	 
+    	 PreparedStatement ps=c.prepareStatement(s);
+    	 ps.setString(1,studentId);
+    	 ResultSet rs=ps.executeQuery();
+    	 while(rs.next()) {
+				for(int i=1;i<=4;i++) {
+					sb.append(String.format("| %-10s", rs.getString(i).trim()));
+				}
+				sb.append("\n");
+			}
+		 sb.append("--------------------------------------------------------------------\n");
+		 System.out.print(sb.toString());
+    	}catch(Exception e) {
+    		System.out.print(e.getMessage());
+    	}
     }
     public ResultSet MyGradeRecords(String sqlQuery) {
     	
@@ -52,8 +105,6 @@ public class dbQueryFunctions {
         {
            Statement statement=c.createStatement();
            statement.executeQuery(sqlString);  
-           
-           
         }
         catch (Exception s)
         {

@@ -7,53 +7,74 @@
  */
 package mygrade;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Scanner;
 
 public class main {
-
+	
 	private static void ActionPrompts() {
-		System.out.println("***************MAIN MENU******************************");
-		System.out.println("1==>Insert/Update/Delete Student");
-		System.out.println("2==>Insert/update/Delete Course");
-		System.out.println("3==>Insert/Update/Delete Grade");
-		System.out.println("4==>Retrieve Grades");
-		System.out.println("5==>Retrieve Courses");
-		System.out.println("6==>Exit the program");
-		System.out.println("******************************************************");
+		
+			//Runtime.getRuntime().exec("CLS");
+			String[] a= {"a"};
+			CLS.main(a);
+		System.out.println("|***************MAIN MENU*************|");
+		System.out.println("|-------------------------------------|");
+		System.out.println("| 1 ==>  STUDENT INFORMATION          |");
+		System.out.println("| 2 ==>  COURSE INFORMATION           |");
+		System.out.println("| 3 ==>  STUDENT GRADE INFORMATION    |");
+		System.out.println("| 4 ==>  RETRIEVE STUDENT GRADES      |");
+		System.out.println("| 5 ==>  HELP                         |");
+		System.out.println("| 6 ==>  Exit the program             |");
+		System.out.println("**************************************");
+		
 	}
 	private static void ActionPromptStudent() {
-		System.out.println("*******STUDENT RECORDS MENU*********");
-		System.out.println("0==>View All Records");
-		System.out.println("1==>Insert new student record");
-		System.out.println("2==>Update student record");
-		System.out.println("3==>Delete student record");
-		System.out.println("4==>Exit to main menu");
-		System.out.println("******************************************************");
+		String[] a= {"a"};
+		CLS.main(a);
+			//Runtime.getRuntime().exec("cmd");
+		System.out.println("|*******STUDENT RECORDS MENU*********|");
+		System.out.println("|------------------------------------|");
+		System.out.println("| 0 ==> VIEW ALL STUDENT RECORDS     |");
+		System.out.println("| 1 ==> INSERT NEW STUDENT RECORD    |");
+		System.out.println("| 2 ==> UPDATE STUDENT RECORD        |");
+		System.out.println("| 3 ==> DELETE STUDENT RECORD        |");
+		System.out.println("| 4 ==> EXIT TO MAIN MENU            |");
+		System.out.println("**************************************");
+		
 	}
 	private static void ActionPromptCourse() {
-		System.out.println("*******COURSE RECORDS MENU*********");
-		System.out.println("0==>View All Course records");
-		System.out.println("1==>Insert new course record");
-		System.out.println("2==>Update Course record");
-		System.out.println("3==>Delete Course record");
-		System.out.println("4==>Exit to main menu");
-		System.out.println("******************************************************");
+		
+		
+		System.out.println("|*******COURSE RECORDS MENU*********|");
+		System.out.println("|------------------------------------|");
+		System.out.println("| 0 ==> VIEW ALL STUDENT RECORDS     |");
+		System.out.println("| 1 ==> INSERT NEW STUDENT RECORD    |");
+		System.out.println("| 2 ==> UPDATE STUDENT RECORD        |");
+		System.out.println("| 3 ==> DELETE STUDENT RECORD        |");
+		System.out.println("| 4 ==> EXIT TO MAIN MENU            |");
+		System.out.println("**************************************");
+	
 	}
 	
 	private static void ActionPromptGrade() {
-		System.out.println("*******GRADE RECORDS MENU*********");
-		System.out.println("0==>View All Grade records");
-		System.out.println("1==>Insert new Grade record");
-		System.out.println("2==>Update Grade record");
-		System.out.println("3==>Delete Grade record");
-		System.out.println("4==>Exit to main menu");
-		System.out.println("******************************************************");
+		
+		//Runtime.getRuntime().exec("CLS");
+		System.out.println("|*******STUDENT-GRADE RECORDS MENU*********|");
+		System.out.println("|------------------------------------|");
+		System.out.println("| 0 ==> VIEW ALL STUDENT RECORDS     |");
+		System.out.println("| 1 ==> INSERT NEW STUDENT RECORD    |");
+		System.out.println("| 2 ==> UPDATE STUDENT RECORD        |");
+		System.out.println("| 3 ==> DELETE STUDENT RECORD        |");
+		System.out.println("| 4 ==> EXIT TO MAIN MENU            |");
+		System.out.println("**************************************");
+
 	}
+	
+	static String sidPrepareStatement="SELECT COUNT(*) FROM Student WHERE StudentId=?";
+	static String courseCodePrepareStatement="SELECT COUNT(*) FROM Courses WHERE CourseCode=?";
+	static String programCodePreparedStatment="SELECT COUNT(*) FROM Program WHERE ProgramCode=?";
+	
 	private static boolean isDigit(String input) {
-		if(input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4") || input.equals("5") || input.equals("6")) {
+		if(input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4") || input.equals("5") || input.equals("6") || input.equals("0")) {
 			return true;
 		}
 		return false;
@@ -109,15 +130,27 @@ public class main {
 									 System.out.print("Enter Student ID:");
 									 Scanner sStdId=new Scanner(System.in);
 									 studentid=sStdId.nextLine();
+									 
 									 System.out.print("Enter FirstName:");
 									 Scanner sFirstName=new Scanner(System.in);
 									 firstname=sFirstName.nextLine();
+									 
 									 System.out.print("Enter Last Name:");
 									 Scanner sLastName=new Scanner(System.in);
 									 lastname=sLastName.nextLine();
+									 
 									 System.out.print("Enter Major Code:");
 									 Scanner sMajor=new Scanner(System.in);
-									 major=sMajor.next();
+									 while(true) {
+										 major=sMajor.next();
+										 if(dbQueryFunctions.isRecordExist(programCodePreparedStatment,major)) {
+												break;
+											}else {
+												System.out.println("The Program Code you entered does not exists...Please check [Eg. BSCS] and retry!");
+											}
+										 
+										 }
+									 
 									 
 									 if(studentid.equals("") || firstname.equals("") || lastname.equals("") || major.equals("") ) {
 										 System.out.println("All input details are required.Please try again...");
@@ -131,18 +164,40 @@ public class main {
 								 case 2://update student record
 									 String ustudentid="",ufirstname="",ulastname="",umajor="";
 									 //Take inputs from user for input into student stable
+									 
 									 System.out.print("Enter Student ID (Update):");
 									 Scanner uStdId=new Scanner(System.in);
-									 ustudentid=uStdId.nextLine();
+									
+									 while(true) {
+										 ustudentid=uStdId.nextLine();
+										 if(dbQueryFunctions.isRecordExist(sidPrepareStatement,ustudentid)) {
+												break;
+											}else {
+												System.out.println("The student ID you entered does not exists...Please check and retry!");
+											}
+										 
+										 }
+									 
 									 System.out.print("Enter New FirstName:");
 									 Scanner uFirstName=new Scanner(System.in);
 									 ufirstname=uFirstName.nextLine();
+									 
 									 System.out.print("Enter New Last Name:");
 									 Scanner uLastName=new Scanner(System.in);
 									 ulastname=uLastName.nextLine();
+									 
 									 System.out.print("Enter New Major Code:");
 									 Scanner uMajor=new Scanner(System.in);
-									 umajor=uMajor.next();
+									 while(true) {
+										 umajor=uMajor.next();
+										 if(dbQueryFunctions.isRecordExist(sidPrepareStatement,umajor)) {
+												break;
+											}else {
+												System.out.println("The Program Code you entered does not exists...Please check and retry!");
+											}
+										 
+										 }
+									
 									 
 									 if(ustudentid.equals("") || ufirstname.equals("") || ulastname.equals("") || umajor.equals("") ) {
 										 System.out.println("All input details are required.Please try again...");
@@ -157,7 +212,15 @@ public class main {
 										 String dStdid="";
 										 System.out.print("Enter Student ID:");
 										 Scanner dStdId=new Scanner(System.in);
-										 dStdid=dStdId.nextLine();
+										 while(true) {
+											 dStdid=dStdId.nextLine();
+											 if(dbQueryFunctions.isRecordExist(sidPrepareStatement,dStdid)) {
+													break;
+												}else {
+													System.out.println("The student ID you entered does not exists...Please check and retry!");
+												}
+											 
+											 }
 										 
 										 if(dStdid.equals("")) {
 											 System.out.println("Please enter a student Id...");
@@ -196,49 +259,99 @@ public class main {
 								 Course course=new Course("","",0,0);
 								 course.Actions(0);
 								 break;
-							 case 1://Insert new student record
-								 String coursecode="",coursename="",points="",level="";
-								 //Take inputs from user for input into student stable
+							 case 1://Insert new course record
+								 String coursecode="",coursename="",level="";
+								 int points=0;
+								 int gradelevel=0;
+								 //Take inputs from user for input into course stable
 								 System.out.print("Enter Course Code:");
 								 Scanner scoursecode=new Scanner(System.in);
 								 coursecode=scoursecode.nextLine();
+								 
 								 System.out.print("Enter Course Name:");
 								 Scanner sCourseName=new Scanner(System.in);
 								 coursename=sCourseName.nextLine();
+								 
+								 c1:
 								 System.out.print("Enter Points:");
 								 Scanner sPoints=new Scanner(System.in);
-								 points=sPoints.next();
+								 String s="";
+								 while(true) {
+									 try{
+										  s=sPoints.next();
+										 points=Integer.parseInt(s);
+										 break;
+									 }catch(Exception e) {
+										 System.out.print("Please try agin");
+									 }
+								 }
 								 
 								 System.out.print("Offered To [Level of Study]:");
 								 Scanner sLevel=new Scanner(System.in);
-								 level=sLevel.next();
+								 while(true) {
+									 try{
+										 gradelevel=Integer.parseInt(sLevel.next());
+										 level=Integer.toString(gradelevel);
+										 break;
+									 }catch(Exception e) {
+										 System.out.print("Please try agin");
+									 }
+								 }
 								 
-								 if(coursecode.equals("") ||coursename.equals("") || points.equals("") || level.equals("") ) {
+								 if(coursecode.equals("") ||coursename.equals("") || Integer.toString(points).equals("") || level.equals("") ) {
 									 System.out.println("All input details are required.Please try again...");
 									 break;
 								 }else {
-									 Course scourse=new Course(coursecode,coursename,Integer.parseInt(points),Integer.parseInt(level));
+									 Course scourse=new Course(coursecode,coursename,points,Integer.parseInt(level));
 									 scourse.Actions(1);
 									 scourse.Actions(0);
 								 }
 								 break;
-							 case 2://update student record
+								 
+							 case 2://update course record
 								 String ucoursecode="",ucoursename="",upoints="",ulevel="";
 								 //Take inputs from user for input into student stable
 								 System.out.print("Enter Course Code:");
 								 Scanner uCoursecode=new Scanner(System.in);
-								 ucoursecode=uCoursecode.nextLine();
+								 while(true) {
+									 ucoursecode=uCoursecode.nextLine();
+									 if(dbQueryFunctions.isRecordExist(courseCodePrepareStatement,ucoursecode)) {
+											break;
+										}else {
+											System.out.println("The Course Code you entered does not exists...Please check and retry!");
+										}
+									 
+									 }
+								 
+								
+								
 								 System.out.print("Enter New Course Name:");
 								 Scanner uCourseName=new Scanner(System.in);
 								 ucoursename=uCourseName.nextLine();
+								 
 								 System.out.print("Enter New Points:");
 								 Scanner uPoints=new Scanner(System.in);
-								 upoints=uPoints.next();
+								 while(true) {
+									 try{
+										 int pts=Integer.parseInt(uPoints.next());
+										 upoints=Integer.toString(pts);
+										 break;
+									 }catch(Exception e) {
+										 System.out.print("Please try agin");
+									 }
+								 }
 								 System.out.print("Offered To [Level of Study]:");
 								 
 								 Scanner uLevel=new Scanner(System.in);
-								 ulevel=uLevel.next();
-								 
+								 while(true) {
+									 try{
+										 int lvl=Integer.parseInt(uLevel.next());
+										 ulevel=Integer.toString(lvl);
+										 break;
+									 }catch(Exception e) {
+										 System.out.print("Please try agin");
+									 }
+								 }
 								 if(ucoursecode.equals("") ||ucoursename.equals("") || upoints.equals("") || ulevel.equals("") ) {
 									 System.out.println("All input details are required.Please try again...");
 									 break;
@@ -271,9 +384,7 @@ public class main {
 					String gInput="4";
 					d:
 					do {
-						/*
-						 * These are options to select for inserting,updating,deleting and retrieving records in the student table
-						 * */
+						
 						ActionPromptGrade();
 						 
 						 Scanner gradeOption=new Scanner(System.in);
@@ -297,20 +408,52 @@ public class main {
 								 //Take inputs from user for input into student stable
 								 System.out.print("Enter Student ID:");
 								 Scanner gStudentId=new Scanner(System.in);
-								 gstudentid=gStudentId.nextLine();
+								 while(true) {
+									 gstudentid=gStudentId.next();
+								 if(dbQueryFunctions.isRecordExist(sidPrepareStatement,gstudentid)) {
+										break;
+									}else {
+										System.out.println("The student ID you entered does not exists...Please check and retry!");
+									}
+								 
+								 }
 								 
 								 System.out.print("Enter Course Code:");
 								 Scanner gCourseCode=new Scanner(System.in);
-								 gcoursecode=gCourseCode.nextLine();
-								 
+								
+								 while(true) {
+									 gcoursecode=gCourseCode.next();
+									 if(dbQueryFunctions.isRecordExist(courseCodePrepareStatement,gcoursecode)) {
+											break;
+										}else {
+											System.out.println("The Course Code you entered does not exists...Please check and retry!");
+										}
+									 
+									 }
+								
 								 System.out.print("Enter Academic Year:");
 								 Scanner gYear=new Scanner(System.in);
-								 gyear=gYear.next();
-								 
+								 while(true) {
+									 try{
+										 int gyr=Integer.parseInt(gYear.next());
+										  gyear=Integer.toString(gyr);
+											 break;
+									 }catch(Exception e) {
+										 System.out.print("Please try agin: ");
+									 }
+								 }
 								 System.out.print("Semester:");
 								 Scanner gSemester=new Scanner(System.in);
-								 gsemester=gSemester.next();
-								 
+								 while(true) {
+									 try{
+										 int gs=Integer.parseInt( gSemester.next());
+										 gsemester=Integer.toString(gs);
+											 break;
+									 }catch(Exception e) {
+										 System.out.print("Please try agin: ");
+									 }
+								 }
+								
 								 System.out.print("Grade Scored:");
 								 Scanner gGrade=new Scanner(System.in);
 								 ggrade=gGrade.next();
@@ -324,24 +467,59 @@ public class main {
 									 graderecord.Actions(0);
 								 }
 								 break;
-							 case 2://update student record
+							 case 2://update grade record
 								 String ugstudentid="",ugcoursecode="",ugyear="",ugsemester,uggrade="";
 								 //Take inputs from user for input into student stable
 								 System.out.print("Enter Student ID:");
 								 Scanner ugStudentId=new Scanner(System.in);
-								 gstudentid=ugStudentId.nextLine();
-								 
+								 while(true) {
+									 gstudentid=ugStudentId.next();
+									 if(dbQueryFunctions.isRecordExist(courseCodePrepareStatement,gstudentid)) {
+											break;
+										}else {
+											System.out.println("The Student ID you entered does not exists...Please check and retry!");
+										}
+									 
+									 }
+								
 								 System.out.print("Enter Course Code:");
 								 Scanner ugCourseCode=new Scanner(System.in);
-								 gcoursecode=ugCourseCode.nextLine();
+								 while(true) {
+									 gcoursecode=ugCourseCode.nextLine();
+									 if(dbQueryFunctions.isRecordExist(courseCodePrepareStatement,gcoursecode)) {
+											break;
+										}else {
+											System.out.println("The Course Code you entered does not exists...Please check and retry!");
+										}
+									 
+									 }
+								
 								 
 								 System.out.print("Enter Academic Year:");
 								 Scanner ugYear=new Scanner(System.in);
-								 gyear=ugYear.next();
+							
+								 while(true) {
+									 try{
+										 int y=Integer.parseInt(ugYear.next());
+										 gyear=Integer.toString(y);
+											 break;
+									 }catch(Exception e) {
+										 System.out.print("Please try agin: ");
+									 }
+								 }
 								 
 								 System.out.print("Semester:");
 								 Scanner ugSemester=new Scanner(System.in);
-								 gsemester=ugSemester.next();
+								 while(true) {
+									 try{
+										 int y=Integer.parseInt(ugSemester.next());
+										 gsemester=Integer.toString(y);
+											 break;
+									 }catch(Exception e) {
+										 System.out.print("Please try agin: ");
+									 }
+								 }
+								 //gsemester=ugSemester.next();
 								 
 								 System.out.print("Grade Scored:");
 								 Scanner ugGrade=new Scanner(System.in);
@@ -358,13 +536,32 @@ public class main {
 								 break;
 							 case 3://Delete student record
 									 String dgstudentId="",dgcoursecode="";
+									 
 									 System.out.print("Enter Student ID:");
 									 Scanner dgStudentId=new Scanner(System.in);
-									 dgstudentId=dgStudentId.nextLine();
+									 while(true) {
+										 dgstudentId=dgStudentId.nextLine();
+									 if(dbQueryFunctions.isRecordExist(sidPrepareStatement,dgstudentId)) {
+											break;
+										}else {
+											System.out.println("The student ID you entered does not exists...Please check and retry!");
+										}
+									 
+									 }
 									 
 									 System.out.print("Enter Course Code [for DELETE]:");
 									 Scanner dgCourseCode=new Scanner(System.in);
-									 dgcoursecode=dgCourseCode.nextLine();
+									 
+									 while(true) {
+										 dgcoursecode=dgCourseCode.nextLine();
+										 if(dbQueryFunctions.isRecordExist(courseCodePrepareStatement,dgcoursecode)) {
+												break;
+											}else {
+												System.out.println("The Course Code you entered does not exists...Please check and retry!");
+											}
+										 
+										 }
+									
 									 
 									 if(dgcoursecode.equals("") || dgstudentId.equals("")) {
 										 System.out.println("Please enter a course code to remove the course record...");
@@ -380,16 +577,42 @@ public class main {
 					}while(!gInput.equals("4"));
 					ActionPrompts();
 					break;
-				case 4:
-					System.out.print("Case 4 comes here");
+					
+				case 4: //Get Grades for a specific student
+					String getGradesOption="4";
+					do {
+						//getSpecificStudentGrades
+						 String dStdid="";
+						 System.out.print("Enter Student ID:");
+						 Scanner dStdId=new Scanner(System.in);
+						 while(true) {
+							 dStdid=dStdId.nextLine();
+							 if(dbQueryFunctions.isRecordExist(sidPrepareStatement,dStdid)) {
+									break;
+								}else {
+									System.out.println("The student ID you entered does not exists...Please check and retry!");
+								}
+							 
+							 }
+						 if(dStdid.equals("")) {
+							 System.out.println("All input details are required.Please try again...");
+							 break;
+						 }else {
+							 dbQueryFunctions.getSpecificStudentGrades(dStdid);
+							 ActionPrompts();
+							 continue a;
+						 }
+					}while(!getGradesOption.equals("6"));
+					
 						break;
+						
 				case 5:
 					System.out.print("Case 5 comes here");
 					break;
 				case 6:
+					System.out.print("THANK YOU FOR USING MyGrade App...BYE BYE!");
 					System.exit(0);
-					System.out.print("Case 6 comes here");
-					//6continue;
+
 				}
 			}
 			
