@@ -60,7 +60,7 @@ public class main {
 		//Runtime.getRuntime().exec("CLS");
 		System.out.println("|*******STUDENT-GRADE RECORDS MENU*********|");
 		System.out.println("|------------------------------------|");
-		System.out.println("| 0 ==> VIEW ALL STUDENT RECORDS     |");
+		System.out.println("| 0 ==> VIEW ALL GRADE RECORDS       |");
 		System.out.println("| 1 ==> INSERT NEW  GRADE RECORD     |");
 		System.out.println("| 2 ==> UPDATE GRADE RECORD          |");
 		System.out.println("| 3 ==> DELETE GRADE RECORD          |");
