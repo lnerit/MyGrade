@@ -44,7 +44,7 @@ public class main {
 	}
 	
 	private static void ActionPromptGrade() {
-		System.out.println("*******COURSE RECORDS MENU*********");
+		System.out.println("*******GRADE RECORDS MENU*********");
 		System.out.println("0==>View All Grade records");
 		System.out.println("1==>Insert new Grade record");
 		System.out.println("2==>Update Grade record");
@@ -90,7 +90,7 @@ public class main {
 							 sInput = gradeOption.nextLine();
 							 
 							 if(!isDigit(sInput)){
-								 System.out.println("PLEASE ENTER ONE OF THE FOLLOWING OPTIONS ONLY [1,2,3,4]");
+								 System.out.println("PLEASE ENTER ONE OF THE FOLLOWING OPTIONS ONLY [0,1,2,3,4]");
 								 continue b;
 							 }
 							 
@@ -184,7 +184,7 @@ public class main {
 						 cInput = courseOption.nextLine();
 						 
 						 if(!isDigit(cInput)){
-							 System.out.println("PLEASE ENTER ONE OF THE FOLLOWING OPTIONS ONLY [1,2,3,4]");
+							 System.out.println("PLEASE ENTER ONE OF THE FOLLOWING OPTIONS ONLY [0,1,2,3,4]");
 							 continue c;
 						 }
 						 
@@ -213,7 +213,7 @@ public class main {
 								 Scanner sLevel=new Scanner(System.in);
 								 level=sLevel.next();
 								 
-								 if(coursecode.equals("") ||coursename.equals("") || points.equals("") && level.equals("") ) {
+								 if(coursecode.equals("") ||coursename.equals("") || points.equals("") || level.equals("") ) {
 									 System.out.println("All input details are required.Please try again...");
 									 break;
 								 }else {
@@ -239,7 +239,7 @@ public class main {
 								 Scanner uLevel=new Scanner(System.in);
 								 ulevel=uLevel.next();
 								 
-								 if(ucoursecode.equals("") ||ucoursename.equals("") || upoints.equals("") && ulevel.equals("") ) {
+								 if(ucoursecode.equals("") ||ucoursename.equals("") || upoints.equals("") || ulevel.equals("") ) {
 									 System.out.println("All input details are required.Please try again...");
 									 break;
 								 }else {
@@ -280,7 +280,7 @@ public class main {
 						 gInput = gradeOption.nextLine();
 						 
 						 if(!isDigit(gInput)){
-							 System.out.println("PLEASE ENTER ONE OF THE FOLLOWING OPTIONS ONLY [1,2,3,4]");
+							 System.out.println("PLEASE ENTER ONE OF THE FOLLOWING OPTIONS ONLY [0,1,2,3,4]");
 							 continue d;
 						 }
 						 
@@ -315,7 +315,7 @@ public class main {
 								 Scanner gGrade=new Scanner(System.in);
 								 ggrade=gGrade.next();
 								 
-								 if(gstudentid.equals("") ||gcoursecode.equals("") || gyear.equals("") && gsemester.equals("") || ggrade.equals("") ) {
+								 if(gstudentid.equals("") ||gcoursecode.equals("") || gyear.equals("") || gsemester.equals("") || ggrade.equals("") ) {
 									 System.out.println("All input details are required.Please try again...");
 									 break;
 								 }else {
@@ -347,7 +347,7 @@ public class main {
 								 Scanner ugGrade=new Scanner(System.in);
 								 ggrade=ugGrade.next();
 								 
-								 if(gstudentid.equals("") ||gcoursecode.equals("") || gyear.equals("") && gsemester.equals("") || ggrade.equals("") ) {
+								 if(gstudentid.equals("") ||gcoursecode.equals("") || gyear.equals("") || gsemester.equals("") || ggrade.equals("") ) {
 									 System.out.println("All input details are required.Please try again...");
 									 break;
 								 }else {

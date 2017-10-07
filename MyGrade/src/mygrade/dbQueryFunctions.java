@@ -1,3 +1,11 @@
+/*
+ * Author: Lenz L Nerit
+ * Date:07/10/2017
+ * Module: Query functions are defined in this class.
+ * Description: This is a real-time grade data logging app.
+ * The back-end is MS SQL Server and the front-end using Java.
+ * This is a class project for CS104 (2017 class).
+ */
 package mygrade;
 
 import java.sql.*;
