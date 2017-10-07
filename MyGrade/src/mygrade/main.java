@@ -46,10 +46,10 @@ public class main {
 		
 		System.out.println("|*******COURSE RECORDS MENU*********|");
 		System.out.println("|------------------------------------|");
-		System.out.println("| 0 ==> VIEW ALL STUDENT RECORDS     |");
-		System.out.println("| 1 ==> INSERT NEW STUDENT RECORD    |");
-		System.out.println("| 2 ==> UPDATE STUDENT RECORD        |");
-		System.out.println("| 3 ==> DELETE STUDENT RECORD        |");
+		System.out.println("| 0 ==> VIEW ALL COURSE RECORDS     |");
+		System.out.println("| 1 ==> INSERT NEW COURSE RECORD    |");
+		System.out.println("| 2 ==> UPDATE COURSE RECORD        |");
+		System.out.println("| 3 ==> DELETE COURSE RECORD        |");
 		System.out.println("| 4 ==> EXIT TO MAIN MENU            |");
 		System.out.println("**************************************");
 	
@@ -61,9 +61,9 @@ public class main {
 		System.out.println("|*******STUDENT-GRADE RECORDS MENU*********|");
 		System.out.println("|------------------------------------|");
 		System.out.println("| 0 ==> VIEW ALL STUDENT RECORDS     |");
-		System.out.println("| 1 ==> INSERT NEW STUDENT RECORD    |");
-		System.out.println("| 2 ==> UPDATE STUDENT RECORD        |");
-		System.out.println("| 3 ==> DELETE STUDENT RECORD        |");
+		System.out.println("| 1 ==> INSERT NEW  GRADE RECORD     |");
+		System.out.println("| 2 ==> UPDATE GRADE RECORD          |");
+		System.out.println("| 3 ==> DELETE GRADE RECORD          |");
 		System.out.println("| 4 ==> EXIT TO MAIN MENU            |");
 		System.out.println("**************************************");
 
