@@ -54,7 +54,7 @@ public class Course {
 					s.setString(2, CourseName);
 					s.setInt(3, Points);
 					s.setInt(4, Level);
-					boolean r=s.execute();
+					int r=s.executeUpdate();
 					int status=s.getUpdateCount();
 					if(status>0) {
 						System.out.println("New Course Record inserted successfully...");

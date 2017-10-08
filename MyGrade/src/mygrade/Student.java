@@ -49,7 +49,7 @@ public class Student {
 				s.setString(2, FirstName);
 				s.setString(3, LastName);
 				s.setString(4, Major);
-				s.execute();
+				s.executeUpdate();
 				int status=s.getUpdateCount();
 				if(status>0) {
 					System.out.println("New Student Record inserted successfully...");
@@ -109,7 +109,7 @@ public class Student {
 			if(c!=null) {
 				PreparedStatement s=c.prepareStatement(sqlString);
 				s.setString(1, StudentId);
-				boolean r=s.execute();
+				int r=s.executeUpdate();
 				int status=s.getUpdateCount();
 				if(status>0) {
 					System.out.println("Student Record ["+StudentId +"] DELETED SUCCESSFULLY...");

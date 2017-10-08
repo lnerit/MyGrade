@@ -116,7 +116,7 @@ public class Grade {
 					PreparedStatement s=c.prepareStatement(sqlString);
 					s.setString(1, StudentId);
 					s.setString(2, CourseCode);
-					boolean r=s.execute();
+					int r=s.executeUpdate();
 					int status=s.getUpdateCount();
 					if(status>0) {
 						System.out.println("Grade Record ["+StudentId+"-->"+CourseCode +"] DELETED SUCCESSFULLY...");
