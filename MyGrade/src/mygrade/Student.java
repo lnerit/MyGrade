@@ -43,9 +43,13 @@ public class Student {
 	}
 	private void InsertStudentRecord(String StudentId,String FirstName,String LastName,String Major) {
 		try {
-			String sqlString="INSERT INTO Student VALUES('"+StudentId+"','"+FirstName+"','"+LastName+"','"+Major+"')";
-				Statement s=c.createStatement();
-				boolean r=s.execute(sqlString);
+			String sqlString="INSERT INTO Student VALUES(?,?,?,?)";
+				PreparedStatement s=c.prepareStatement(sqlString);
+				s.setString(1, StudentId);
+				s.setString(2, FirstName);
+				s.setString(3, LastName);
+				s.setString(4, Major);
+				s.execute();
 				int status=s.getUpdateCount();
 				if(status>0) {
 					System.out.println("New Student Record inserted successfully...");
@@ -101,10 +105,11 @@ public class Student {
 	private void DeleteStudentRecord(String StudentId) {
 		try {
 		
-			String sqlString="DELETE FROM Student WHERE StudentId='"+StudentId+"'";
+			String sqlString="DELETE FROM Student WHERE StudentId=?";
 			if(c!=null) {
-				Statement s=c.createStatement();
-				boolean r=s.execute(sqlString);
+				PreparedStatement s=c.prepareStatement(sqlString);
+				s.setString(1, StudentId);
+				boolean r=s.execute();
 				int status=s.getUpdateCount();
 				if(status>0) {
 					System.out.println("Student Record ["+StudentId +"] DELETED SUCCESSFULLY...");
