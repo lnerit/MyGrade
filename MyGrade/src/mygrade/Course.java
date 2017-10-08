@@ -150,16 +150,16 @@ public class Course {
 				s = c.createStatement();
 				ResultSet rs=s.executeQuery(sqlStr);
 				
-				 String[] sx= {"Course Code","Course Name","Points"};
+				 String[] sx= {"Course Code","Course Name\t\t","Points","Level Of Study"};
 				 StringBuilder sb=new StringBuilder();
 				 sb.append("--------------------------------------------------------------------\n");
-				 for(int x=0;x<3;x++) {
+				 for(int x=0;x<4;x++) {
 					 sb.append(String.format("| %-10s",sx[x]));
 				 }
 				 sb.append("\n");
 				 sb.append("--------------------------------------------------------------------\n");
 				while(rs.next()) {
-					for(int i=1;i<=3;i++) {
+					for(int i=1;i<=4;i++) {
 						sb.append(String.format("| %-10s", rs.getString(i).trim()));
 						//System.out.println(rs.getString(1)+"\t\t"+rs.getString(2)+"\t\t\t\t"+rs.getString(3));
 					}
