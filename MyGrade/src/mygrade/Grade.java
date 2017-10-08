@@ -156,6 +156,7 @@ public class Grade {
 				 for(int x=0;x<5;x++) {
 					 sb.append(String.format("| %-10s",sx[x]));
 				 }
+				 
 				 sb.append("\n");
 				 sb.append("--------------------------------------------------------------------\n");
 				while(rs.next()) {
