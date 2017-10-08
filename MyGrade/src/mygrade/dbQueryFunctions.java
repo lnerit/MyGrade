@@ -65,7 +65,7 @@ public class dbQueryFunctions {
     }
     public static void getSpecificStudentGrades(String studentId) {
     	try {
-    	String s=" SELECT CourseCode,YearOfStudy as [Year],Semester,Grade FROM Grade WHERE StudentId=?";
+    	String s=" SELECT CourseCode,YearOfStudy as [Year],Semester,Grade FROM Grade WHERE StudentId=? ORDER BY YearOfStudy DESC,Semester ASC";
     	String sname=" SELECT FirstName + ' ' + LastName + ' [ '+'"+studentId+"'+' ]' FROM Student WHERE StudentId='"+studentId+"'";
     	String studentName=ExecuteScalarQuery(sname);
     	
