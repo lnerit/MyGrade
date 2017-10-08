@@ -13,6 +13,9 @@ public class Student {
 	private String StudentId,FirstName,LastName,Major;
 	dbConnection dbCon=new dbConnection();
 	Connection c=dbCon.dbConn();
+	public Student(int choice) {
+		Actions(choice);
+	}
 	public Student(String StudentId,String FirstName,String LastName,String Major) {
 		//selectedOption=userSelectedOption;
 		this.StudentId=StudentId;
@@ -50,7 +53,7 @@ public class Student {
 					System.out.println("Insert operation unsuccessful...");
 				}
 			
-			
+				s.close();
 			 
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -82,7 +85,7 @@ public class Student {
 					System.out.println("Student Record UPDATE UNSUCCESSFUL");
 				}
 			//}
-			 
+				s.close();
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}finally {
@@ -108,7 +111,7 @@ public class Student {
 				}else {
 					System.out.println("DELETE OPERATION UNSUCCESSFUL...");
 				}
-				
+				s.close();
 			}
 			 
 		}catch(Exception e) {
@@ -151,7 +154,8 @@ public class Student {
 			}
 			 sb.append("--------------------------------------------------------------------\n");
 			 System.out.println(sb.toString());
-
+			 rs.close();
+			 s.close();
 		} catch (SQLException e) {
 			System.out.print("Error occured while retrieving student records...Please try again!"+e.getMessage());
 		}finally {

@@ -10,12 +10,11 @@ public class dbConnection {
 	
 public Connection dbConn(){
 
-		 final String dbConnectionString="jdbc:sqlserver://localhost;user=sa;password=root;database=MyGrades";
+   final String dbConnectionString="jdbc:sqlserver://localhost;user=sa;password=root;database=MyGrades";
 
 	try {
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 	} catch (ClassNotFoundException e1) {
-		//e1.printStackTrace();
 		System.out.print("Class Not Found...");
 	}
 	try {
@@ -24,7 +23,7 @@ public Connection dbConn(){
 			return conn;
 		}
 	} catch (SQLException e) {
-		//Catch exception here
+		System.out.println(e.getMessage());
 	}
 	return null;
 }

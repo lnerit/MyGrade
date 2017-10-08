@@ -14,8 +14,7 @@ public class main {
 	private static void ActionPrompts() {
 		
 			//Runtime.getRuntime().exec("CLS");
-			String[] a= {"a"};
-			CLS.main(a);
+			
 		System.out.println("|***************MAIN MENU*************|");
 		System.out.println("|-------------------------------------|");
 		System.out.println("| 1 ==>  STUDENT INFORMATION          |");
@@ -71,6 +70,10 @@ public class main {
 	static String sidPrepareStatement="SELECT COUNT(*) FROM Student WHERE StudentId=?";
 	static String courseCodePrepareStatement="SELECT COUNT(*) FROM Courses WHERE CourseCode=?";
 	static String programCodePreparedStatment="SELECT COUNT(*) FROM Program WHERE ProgramCode=?";
+	
+	static String sqluString="UPDATE Student SET FirstName=?,LastName=?,Major=? WHERE StudentId=?";
+	static String sqliString="INSERT INTO Student VALUES(?,?,?,?)";
+	String sqlString="DELETE FROM Student WHERE StudentId=?";
 	
 	private static boolean isDigit(String input) {
 		if(input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4") || input.equals("5") || input.equals("6") || input.equals("0")) {
@@ -142,7 +145,7 @@ public class main {
 									 System.out.print("Enter Major Code:");
 									 Scanner sMajor=new Scanner(System.in);
 									 while(true) {
-										 major=sMajor.next();
+										 major=sMajor.nextLine();
 										 if(dbQueryFunctions.isRecordExist(programCodePreparedStatment,major)) {
 												break;
 											}else {
@@ -159,6 +162,11 @@ public class main {
 										 Student studentInsert=new Student(studentid,firstname,lastname,major);
 										 studentInsert.Actions(1);
 										 studentInsert.Actions(0);
+										 //dbQueryFunctions.ExecuteNonQuerySql(sqliString, studentid,firstname,lastname,major);
+										 //Student std=new Student(0);
+										 //std.Actions(1);
+										 //std.Actions(0);
+										 
 									 }
 									 break;
 								 case 2://update student record
@@ -194,8 +202,7 @@ public class main {
 												break;
 											}else {
 												System.out.println("The Program Code you entered does not exists...Please check and retry!");
-											}
-										 
+											}	 
 										 }
 									
 									 
@@ -323,9 +330,7 @@ public class main {
 										}
 									 
 									 }
-								 
-								
-								
+								 								
 								 System.out.print("Enter New Course Name:");
 								 Scanner uCourseName=new Scanner(System.in);
 								 ucoursename=uCourseName.nextLine();
@@ -362,6 +367,7 @@ public class main {
 									 ucourse.Actions(0);
 								 }
 								 break;
+								 
 							 case 3://Delete student record
 									 String dcourseCode="";
 									 System.out.print("Enter Course Code [for DELETE]:");
@@ -444,6 +450,8 @@ public class main {
 										 System.out.print("Please try agin: ");
 									 }
 								 }
+								 
+								 
 								 System.out.print("Semester:");
 								 Scanner gSemester=new Scanner(System.in);
 								 while(true) {
@@ -455,7 +463,23 @@ public class main {
 										 System.out.print("Please try agin: ");
 									 }
 								 }
+								 /**
+								  * We need to check whether the course code we are inserting is offered in the appropriate semester.
+								  * That is, there is a high chance of semester 2 course code tagged to semester 1 for a Grade scored
+								  * by a student so, we need to be accurate here.
+								  * */
 								
+								 String csString="SELECT COUNT(*) FROM SemesterCourse WHERE Semester=? AND CourseCode=?";
+								 
+								 while(true) {
+									 if(dbQueryFunctions.isRecordExist(csString,gsemester,gcoursecode)) {
+											break;
+										}else {
+											System.out.println("The Course Code you entered is not offered in semester "+gsemester+"...Please check and retry!");
+										continue d;
+										}
+								 }
+								 
 								 System.out.print("Grade Scored:");
 								 Scanner gGrade=new Scanner(System.in);
 								 ggrade=gGrade.next();
@@ -465,19 +489,6 @@ public class main {
 									 break;
 								 }else {
 									 
-									 /**
-									  * We need to check whether the course code we are inserting is offered in the appropriate semester.
-									  * That is, there is a high chance of semester 2 course code tagged to semester 1 for a Grade scored
-									  * by a student so, we need to be accurate here.
-									  * */
-									 String csString="SELECT COUNT(*) FROM SemesterCourse WHERE Semester=? AND CourseCode=?";
-									 while(true) {
-										 if(dbQueryFunctions.isRecordExist(csString,gsemester,gcoursecode)) {
-												break;
-											}else {
-												System.out.println("The Course Code you entered is not offered in semester "+gsemester+"...Please check and retry!");
-											}
-									 }
 									 Grade graderecord=new Grade(gstudentid,gcoursecode,Integer.parseInt(gyear),Integer.parseInt(gsemester),ggrade);
 									 graderecord.Actions(1);
 									 graderecord.Actions(0);
@@ -489,8 +500,8 @@ public class main {
 								 System.out.print("Enter Student ID:");
 								 Scanner ugStudentId=new Scanner(System.in);
 								 while(true) {
-									 gstudentid=ugStudentId.next();
-									 if(dbQueryFunctions.isRecordExist(courseCodePrepareStatement,gstudentid)) {
+									 ugstudentid=ugStudentId.next();
+									 if(dbQueryFunctions.isRecordExist(sidPrepareStatement,ugstudentid)) {
 											break;
 										}else {
 											System.out.println("The Student ID you entered does not exists...Please check and retry!");
@@ -541,11 +552,11 @@ public class main {
 								 Scanner ugGrade=new Scanner(System.in);
 								 ggrade=ugGrade.next();
 								 
-								 if(gstudentid.equals("") ||gcoursecode.equals("") || gyear.equals("") || gsemester.equals("") || ggrade.equals("") ) {
+								 if(ugstudentid.equals("") ||gcoursecode.equals("") || gyear.equals("") || gsemester.equals("") || ggrade.equals("") ) {
 									 System.out.println("All input details are required.Please try again...");
 									 break;
 								 }else {
-									 Grade graderecord=new Grade(gstudentid,gcoursecode,Integer.parseInt(gyear),Integer.parseInt(gsemester),ggrade);
+									 Grade graderecord=new Grade(ugstudentid,gcoursecode,Integer.parseInt(gyear),Integer.parseInt(gsemester),ggrade);
 									 graderecord.Actions(2);
 									 graderecord.Actions(0);
 								 }

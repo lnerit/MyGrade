@@ -65,7 +65,7 @@ public class Grade {
 					}else {
 						System.out.println("INSERT OPERATION UNSUCCESSFUL...");
 					}
-				 
+					s.close();
 			}catch(Exception e) {
 				System.out.println(e.getMessage());
 			}finally {
@@ -96,7 +96,7 @@ public class Grade {
 						System.out.println("Grade Record UPDATE UNSUCCESSFUL");
 					}
 				
-				 
+					s.close();
 			}catch(Exception e) {
 				System.out.println(e.getMessage());
 			}finally {
@@ -123,7 +123,7 @@ public class Grade {
 					}else {
 						System.out.println("DELETE OPERATION UNSUCCESSFUL...");
 					}
-					
+					s.close();
 				}
 				 
 			}catch(Exception e) {
@@ -167,7 +167,8 @@ public class Grade {
 				}
 				 sb.append("--------------------------------------------------------------------\n");
 				System.out.println(sb.toString());
-			
+				rs.close();
+				s.close();
 			} catch (SQLException e) {
 				System.out.print("Error occured while retrieving student records...Please try again!"+e.getMessage());
 			}finally {

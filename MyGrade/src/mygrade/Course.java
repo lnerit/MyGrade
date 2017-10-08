@@ -61,12 +61,13 @@ public class Course {
 					}else {
 						System.out.println("INSERT OPERATION UNSUCCESSFUL...");
 					}
-				
+					s.close();
 				
 				 
 			}catch(Exception e) {
 				System.out.println(e.getMessage());
 			}finally {
+				
 				if(c!=null) {
 					try {
 						c.close();
@@ -93,6 +94,7 @@ public class Course {
 					}else {
 						System.out.println("Course Record UPDATE UNSUCCESSFUL");
 					}
+					s.close();
 				//}
 				 
 			}catch(Exception e) {
@@ -121,7 +123,7 @@ public class Course {
 					}else {
 						System.out.println("DELETE OPERATION UNSUCCESSFUL...");
 					}
-					
+					s.close();
 				}
 				 
 			}catch(Exception e) {
@@ -165,6 +167,7 @@ public class Course {
 				}
 				 sb.append("--------------------------------------------------------------------\n");
 				 System.out.println(sb.toString()+"\n");
+				 s.close();
 
 			} catch (SQLException e) {
 				System.out.print("Error occured while retrieving student records...Please try again!"+e.getMessage());

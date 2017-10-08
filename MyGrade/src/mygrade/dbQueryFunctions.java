@@ -23,30 +23,37 @@ public class dbQueryFunctions {
 			}
 			String s =sqlString;
 			PreparedStatement stmt=c.prepareStatement(s);
-			for(int i=0;i<args.length-1;i++) {
+			for(int i=0;i<=args.length-1;i++) {
 				stmt.setString(i+1, args[i]);
 			}
 			ResultSet rs=stmt.executeQuery();
 			if(rs.next() && rs.getInt(1)>0) {
 				return true;
 			}
-			
+			rs.close();
+			stmt.close();
 		} catch (SQLException e) {
-			System.out.print("Error occured...try again");
+			System.out.print(e.getMessage());
 		}
 		
 		return false;
 	}
 	
-    public static String ExecuteScalarQuery(String sqlString)
+    public static String ExecuteScalarQuery(String sqlString,String...args)
     {
        try{
             Statement statement=c.createStatement();
+            PreparedStatement pStatement=c.prepareStatement(sqlString);
+            for(int i=0;i<=args.length-1;i++) {
+            	pStatement.setString(i+1, args[i]);
+            }
             ResultSet rs=statement.executeQuery(sqlString);
             String returnStr="";
             while(rs.next()){
                     returnStr = (rs.getString(1) == null) ? "" : rs.getString(1);
             }
+            rs.close();
+            pStatement.close();
             return returnStr;
         }
         catch (Exception s)
@@ -84,6 +91,8 @@ public class dbQueryFunctions {
 			}
 		 sb.append("--------------------------------------------------------------------\n");
 		 System.out.print(sb.toString());
+		 rs.close();
+		 ps.close();
     	}catch(Exception e) {
     		System.out.print(e.getMessage());
     	}
@@ -93,6 +102,7 @@ public class dbQueryFunctions {
 		try {
 			Statement s = c.createStatement();
 			ResultSet rSet=s.executeQuery(sqlQuery);
+			s.close();
 			return rSet;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -101,12 +111,30 @@ public class dbQueryFunctions {
 		return null;
     }
     
-    public void ExecuteNonQuerySql(String sqlString)
+    public static void ExecuteNonQuerySql(String sqlString,String... args)
     {
         try
         {
-           Statement statement=c.createStatement();
-           statement.executeQuery(sqlString);  
+           PreparedStatement pStatement=c.prepareStatement(sqlString);
+           for(int i=0;i<=args.length-1;i++) {
+        	   pStatement.setString(i+1, args[i]);
+           }
+           pStatement.executeQuery();  
+           int status=pStatement.getUpdateCount();
+			if(status>0) {
+				if(sqlString.contains("INSERT")) {
+					System.out.println("New  Record inserted successfully...");
+				}
+				if(sqlString.contains("UPDATE")) {
+					System.out.println("Record updated successfully...");
+				}
+				if(sqlString.contains("DELETE")) {
+					System.out.println("Record deleted successfully...");
+				}
+			}else {
+				System.out.println("Insert operation unsuccessful...");
+			}
+			pStatement.close();
         }
         catch (Exception s)
         {
