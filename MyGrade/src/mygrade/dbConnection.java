@@ -10,7 +10,7 @@ public class dbConnection {
 	
 public Connection dbConn(){
 
-		String dbConnectionString="jdbc:sqlserver://localhost;user=sa;password=root;database=MyGrades";
+		 final String dbConnectionString="jdbc:sqlserver://localhost;user=sa;password=root;database=MyGrades";
 
 	try {
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
