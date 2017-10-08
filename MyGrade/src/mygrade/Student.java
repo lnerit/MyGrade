@@ -43,7 +43,7 @@ public class Student {
 	}
 	private void InsertStudentRecord(String StudentId,String FirstName,String LastName,String Major) {
 		try {
-			String sqlString="INSERT INTO Student VALUES(?,?,?,?)";
+			String sqlString="EXEC InsertStudent ?,?,?,?,'I'";
 				PreparedStatement s=c.prepareStatement(sqlString);
 				s.setString(1, StudentId);
 				s.setString(2, FirstName);
@@ -74,13 +74,14 @@ public class Student {
 	private void UpdateStudentRecord(String StudentId,String FirstName,String LastName,String Major) {
 		try {
 		
-			String sqlString="UPDATE Student SET FirstName=?,LastName=?,Major=? WHERE StudentId=?";
+			//String sqlString="UPDATE Student SET FirstName=?,LastName=?,Major=? WHERE StudentId=?";
 			//if(c!=null) {
+			String sqlString="EXEC InsertStudent ?,?,?,?,'U'";
 				PreparedStatement s=c.prepareStatement(sqlString,Statement.RETURN_GENERATED_KEYS);
-				s.setString(4, StudentId);
-				s.setString(1, FirstName);
-				s.setString(2, LastName);
-				s.setString(3, Major);
+				s.setString(1, StudentId);
+				s.setString(2, FirstName);
+				s.setString(3, LastName);
+				s.setString(4, Major);
 				s.executeUpdate();
 				int r=s.getUpdateCount();
 				if(r>0) {
