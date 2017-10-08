@@ -28,8 +28,7 @@ public class main {
 		
 	}
 	private static void ActionPromptStudent() {
-		String[] a= {"a"};
-		CLS.main(a);
+	
 			//Runtime.getRuntime().exec("cmd");
 		System.out.println("|*******STUDENT RECORDS MENU*********|");
 		System.out.println("|------------------------------------|");
@@ -88,10 +87,11 @@ public class main {
 		String input="6";
 		a:
 		do {
-		
+			//Take input for MAIN MENU options
 			Scanner scanner=new Scanner(System.in);
 			 input = scanner.nextLine();
 			 
+			 //If non of the numbers other than the options given a entered then,the user is prompted to enter again.
 			 if(!isDigit(input.toString())){
 				 System.out.println("PLEASE ENTER ONE OF THE FOLLOWING OPTIONS ONLY [1,2,3,4,5,6]");
 				 continue a;
@@ -100,7 +100,7 @@ public class main {
 			if(input.toString()!="") {
 				int userInput=Integer.parseInt(input.toString());
 				switch(userInput) {
-				case 1:
+				case 1: //For selecting student records
 						String sInput="4";
 						b:
 						do {
@@ -190,7 +190,7 @@ public class main {
 									 Scanner uMajor=new Scanner(System.in);
 									 while(true) {
 										 umajor=uMajor.next();
-										 if(dbQueryFunctions.isRecordExist(sidPrepareStatement,umajor)) {
+										 if(dbQueryFunctions.isRecordExist(programCodePreparedStatment,umajor)) {
 												break;
 											}else {
 												System.out.println("The Program Code you entered does not exists...Please check and retry!");
@@ -236,7 +236,8 @@ public class main {
 						}while(!sInput.equals("4"));
 						ActionPrompts();
 					break;
-				case 2: 
+					
+				case 2: //Case 2 handles Course records
 					String cInput="4";
 					c:
 					do {
@@ -380,7 +381,8 @@ public class main {
 					}while(!cInput.equals("4"));
 					ActionPrompts();
 					break;
-				case 3:
+					
+				case 3: //Case 3 handles GRADE record operations
 					String gInput="4";
 					d:
 					do {
@@ -462,6 +464,20 @@ public class main {
 									 System.out.println("All input details are required.Please try again...");
 									 break;
 								 }else {
+									 
+									 /**
+									  * We need to check whether the course code we are inserting is offered in the appropriate semester.
+									  * That is, there is a high chance of semester 2 course code tagged to semester 1 for a Grade scored
+									  * by a student so, we need to be accurate here.
+									  * */
+									 String csString="SELECT COUNT(*) FROM SemesterCourse WHERE Semester=? AND CourseCode=?";
+									 while(true) {
+										 if(dbQueryFunctions.isRecordExist(csString,gsemester,gcoursecode)) {
+												break;
+											}else {
+												System.out.println("The Course Code you entered is not offered in semester "+gsemester+"...Please check and retry!");
+											}
+									 }
 									 Grade graderecord=new Grade(gstudentid,gcoursecode,Integer.parseInt(gyear),Integer.parseInt(gsemester),ggrade);
 									 graderecord.Actions(1);
 									 graderecord.Actions(0);

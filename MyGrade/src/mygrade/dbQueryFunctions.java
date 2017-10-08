@@ -16,14 +16,16 @@ public class dbQueryFunctions {
 	static dbConnection conn=new dbConnection();
 	static Connection c=conn.dbConn();
 
-	public static boolean isRecordExist(String sqlString,String parameter) {
+	public static boolean isRecordExist(String sqlString,String... args) {
 		try {
 			if(c.isClosed()) {
 				c=conn.dbConn();
 			}
 			String s =sqlString;
 			PreparedStatement stmt=c.prepareStatement(s);
-			stmt.setString(1, parameter);
+			for(int i=0;i<args.length-1;i++) {
+				stmt.setString(i+1, args[i]);
+			}
 			ResultSet rs=stmt.executeQuery();
 			if(rs.next() && rs.getInt(1)>0) {
 				return true;
