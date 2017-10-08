@@ -140,7 +140,7 @@ public class Grade {
 		}
 		
 		private void getGradeRecord() {
-			String sqlStr="SELECT * FROM Grade ORDER BY YearOfStudy,Semester ASC";
+			String sqlStr="SELECT * FROM Grade ORDER BY YearOfStudy DESC,Semester ASC";
 			
 			Statement s;
 			try {
