@@ -24,7 +24,8 @@ public class main {
 		System.out.println("| 5 ==>  HELP                         |");
 		System.out.println("| 6 ==>  Exit the program             |");
 		System.out.println("**************************************");
-		
+		System.out.print("Enter input: ");
+		System.out.println();
 	}
 	private static void ActionPromptStudent() {
 	
@@ -37,6 +38,8 @@ public class main {
 		System.out.println("| 3 ==> DELETE STUDENT RECORD        |");
 		System.out.println("| 4 ==> EXIT TO MAIN MENU            |");
 		System.out.println("**************************************");
+		System.out.print("Enter input: ");
+		System.out.println();
 		
 	}
 	private static void ActionPromptCourse() {
@@ -50,7 +53,8 @@ public class main {
 		System.out.println("| 3 ==> DELETE COURSE RECORD        |");
 		System.out.println("| 4 ==> EXIT TO MAIN MENU            |");
 		System.out.println("**************************************");
-	
+		System.out.print("Enter input: ");
+		System.out.println();
 	}
 	
 	private static void ActionPromptGrade() {
@@ -603,6 +607,8 @@ public class main {
 						 }
 					}while(!gInput.equals("4"));
 					ActionPrompts();
+					
+					
 					break;
 					
 				case 4: //Get Grades for a specific student
