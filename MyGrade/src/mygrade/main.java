@@ -25,7 +25,7 @@ public class main {
 		System.out.println("| 6 ==>  Exit the program             |");
 		System.out.println("**************************************");
 		System.out.print("Enter input: ");
-		System.out.println();
+		
 	}
 	private static void ActionPromptStudent() {
 	
@@ -39,7 +39,7 @@ public class main {
 		System.out.println("| 4 ==> EXIT TO MAIN MENU            |");
 		System.out.println("**************************************");
 		System.out.print("Enter input: ");
-		System.out.println();
+	
 		
 	}
 	private static void ActionPromptCourse() {
@@ -54,7 +54,7 @@ public class main {
 		System.out.println("| 4 ==> EXIT TO MAIN MENU            |");
 		System.out.println("**************************************");
 		System.out.print("Enter input: ");
-		System.out.println();
+		
 	}
 	
 	private static void ActionPromptGrade() {
@@ -68,7 +68,7 @@ public class main {
 		System.out.println("| 3 ==> DELETE GRADE RECORD          |");
 		System.out.println("| 4 ==> EXIT TO MAIN MENU            |");
 		System.out.println("**************************************");
-
+		System.out.print("Enter input: ");
 	}
 	
 	static String sidPrepareStatement="SELECT COUNT(*) FROM Student WHERE StudentId=?";
