@@ -16,6 +16,7 @@ public class Student {
 	public Student(int choice) {
 		Actions(choice);
 	}
+	
 	public Student(String StudentId,String FirstName,String LastName,String Major) {
 		//selectedOption=userSelectedOption;
 		this.StudentId=StudentId;
@@ -23,12 +24,12 @@ public class Student {
 		this.LastName=LastName;
 		this.Major=Major;
 	}
+	
 	public void Actions(int userSelectedOption) {
 		switch(userSelectedOption) {
 		case 0:
 			getStudentRecord();
 			break;
-
 		case 1:
 			InsertStudentRecord(StudentId,FirstName,LastName,Major);
 			break;
@@ -39,8 +40,8 @@ public class Student {
 			DeleteStudentRecord(StudentId);
 			break;
 		}
-		
 	}
+	
 	private void InsertStudentRecord(String StudentId,String FirstName,String LastName,String Major) {
 		try {
 			String sqlString="EXEC InsertStudent ?,?,?,?,'I'";

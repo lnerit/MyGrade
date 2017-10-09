@@ -47,8 +47,8 @@ public class Grade {
 				DeleteGradeRecord(StudentId,CourseCode);
 				break;
 			}
-			
 		}
+		
 		private void InsertGradeRecord(String StudentId,String CourseCode,int Year,int Semester,String Grade) {
 			try {
 				String sqlString="INSERT INTO Grade VALUES(?,?,?,?,?)";
@@ -78,6 +78,7 @@ public class Grade {
 				}
 			}
 		}
+		
 		private void UpdateGradeRecord(String StudentId,String CourseCode,int Year,int Semester,String Grade) {
 			try {
 				String sqlString="UPDATE Grade SET YearOfStudy=?,Semester=?,Grade=? WHERE CourseCode=? AND StudentId=?";
@@ -95,7 +96,6 @@ public class Grade {
 					}else {
 						System.out.println("Grade Record UPDATE UNSUCCESSFUL");
 					}
-				
 					s.close();
 			}catch(Exception e) {
 				System.out.println(e.getMessage());
@@ -109,6 +109,7 @@ public class Grade {
 				}
 			}
 		}
+		
 		private void DeleteGradeRecord(String StudentId,String CourseCode) {
 			try {
 				String sqlString="DELETE FROM Grade WHERE StudentId=? AND CourseCode=?";
@@ -125,9 +126,8 @@ public class Grade {
 					}
 					s.close();
 				}
-				 
 			}catch(Exception e) {
-				
+				System.out.println("An error occured while deleting record..."+ e.getMessage());
 			}finally {
 				if(c!=null) {
 					try {
