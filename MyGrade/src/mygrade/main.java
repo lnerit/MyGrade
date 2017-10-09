@@ -643,7 +643,8 @@ public class main {
 					System.out.print("Case 5 comes here");
 					break;
 				case 6:
-					System.out.print("THANK YOU FOR USING MyGrade App...BYE BYE!");
+					System.out.println("THANK YOU FOR USING MyGrade App...BYE BYE!");
+					System.out.println("");
 					System.exit(0);
 
 				}

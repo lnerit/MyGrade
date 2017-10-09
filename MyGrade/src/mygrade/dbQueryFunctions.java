@@ -63,6 +63,7 @@ public class dbQueryFunctions {
         
         return "";
     }
+    
     public static void getSpecificStudentGrades(String studentId) {
     	try {
     	String s=" SELECT CourseCode,YearOfStudy as [Year],Semester,Grade FROM Grade WHERE StudentId=? ORDER BY YearOfStudy DESC,Semester ASC";
@@ -140,6 +141,5 @@ public class dbQueryFunctions {
         {
         	JOptionPane.showMessageDialog(null,s.getMessage());
         }
-       
     }
 }

@@ -164,7 +164,6 @@ public class Grade {
 						sb.append(String.format("| %-10s", rs.getString(i).trim()));
 					}
 					sb.append("\n");
-
 				}
 				 sb.append("--------------------------------------------------------------------\n");
 				System.out.println(sb.toString());
