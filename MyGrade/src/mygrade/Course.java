@@ -31,7 +31,7 @@ public class Course {
 		public void Actions(int userSelectedOption) {
 			switch(userSelectedOption) {
 			case 0:
-				getStudentRecord();
+				getCourseRecord();
 				break;
 
 			case 1:
@@ -139,7 +139,7 @@ public class Course {
 			}
 		}
 		
-		private void getStudentRecord() {
+		private void getCourseRecord() {
 			String sqlStr="SELECT * FROM Courses ORDER BY CourseCode ASC";
 			
 			Statement s;

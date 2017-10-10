@@ -4,7 +4,7 @@
  * Module: This class handles database operations for GRADES 
  * Description: This is a real-time grade data logging app.
  * The back-end is MS SQL Server and the front-end using Java.
- * This is a class project for CS104 (2017 class).
+ * This is a class project for CS204 (2017 class).
  */
 package mygrade;
 

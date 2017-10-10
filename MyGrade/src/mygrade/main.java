@@ -85,6 +85,14 @@ public class main {
 		}
 		return false;
 	}
+	
+	private static boolean isGradeValid(String input) {
+		if(input.equals("A") || input.equals("B") || input.equals("C") || input.equals("D") || input.equals("E") || input.equals("A")) {
+			return true;
+		}
+		return false;
+	}
+	
 	public static void main(String[] args) {
 		//Call the database connection and check the status
 		dbQueryFunctions q=new dbQueryFunctions();
@@ -473,7 +481,7 @@ public class main {
 								  * by a student so, we need to be accurate here.
 								  * */
 								
-								 String csString="SELECT COUNT(*) FROM SemesterCourse WHERE Semester=? AND CourseCode=?";
+								 /*String csString="SELECT COUNT(*) FROM SemesterCourse WHERE Semester=? AND CourseCode=?";
 								 
 								 while(true) {
 									 if(dbQueryFunctions.isRecordExist(csString,gsemester,gcoursecode)) {
@@ -482,11 +490,18 @@ public class main {
 											System.out.println("The Course Code you entered is not offered in semester "+gsemester+"...Please check and retry!");
 										continue d;
 										}
-								 }
+								 }*/
 								 
 								 System.out.print("Grade Scored:");
 								 Scanner gGrade=new Scanner(System.in);
-								 ggrade=gGrade.next();
+								 while(true) {
+									 ggrade=gGrade.next();
+									 if(isGradeValid(ggrade)) {
+									 break;
+									 }else {
+										 System.out.println("Please enter one of the following Grades:[A,B,C,D,E or F]"); 
+									 }
+								 }
 								 
 								 if(gstudentid.equals("") ||gcoursecode.equals("") || gyear.equals("") || gsemester.equals("") || ggrade.equals("") ) {
 									 System.out.println("All input details are required.Please try again...");
@@ -650,7 +665,7 @@ public class main {
 				}
 			}
 			
-		}while(input.toString()!="6");
+		}while(input.toString()=="6");
 
 	}
 

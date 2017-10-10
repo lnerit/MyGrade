@@ -43,5 +43,46 @@ CREATE TABLE Grade(
 	Grade char(2),
 	PRIMARY KEY(StudentId,CourseCode,YearOfStudy,Semester),
 	CONSTRAINT FK_Course FOREIGN KEY(CourseCode) REFERENCES Courses(CourseCode) ON UPDATE CASCADE ON DELETE CASCADE,
-	CONSTRAINT FK_Student FOREIGN KEY(StudentId) REFERENCES Student(StudentId) ON UPDATE CASCADE ON DELETE CASCADE	
+	CONSTRAINT FK_Student FOREIGN KEY(StudentId) REFERENCES Student(StudentId) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT FK_CourseSemester FOREIGN KEY(CourseCode,Semester) REFERENCES SemesterCourse(CourseCode,Semester)
 )
+
+
+/**
+ * Stored Procedures
+ */
+create procedure InsertStudent(
+	@StudentId varchar(15),
+	@FirstName varchar(50),
+	@LastName varchar(50),
+	@Major varchar(10),
+	@option char(1)
+)
+AS
+BEGIN
+	IF @option='I'
+		BEGIN
+			IF EXISTS (SELECT * FROM Student WHERE StudentId=@StudentId)
+				BEGIN
+					RAISERROR('The STUDENT ID YOU ENTERED ALREADY EXISTS...PLEASE TRY A DIFFERENT ID',16,1);
+					RETURN
+				END
+			ELSE
+				BEGIN
+					INSERT INTO Student VALUES(@StudentId,@FirstName,@LastName,@Major)
+				END
+	  END
+	IF @option='U'
+		BEGIN
+			IF NOT EXISTS (SELECT * FROM Student WHERE StudentId=@StudentId)
+				BEGIN
+					RAISERROR('The STUDENT ID YOU ENTERED DOES NOT EXIST...PLEASE TRY A DIFFERENT ID',16,1);
+					RETURN
+				END
+			ELSE
+				BEGIN
+					UPDATE Student SET FirstName=@FirstName,LastName=@LastName,Major=Major WHERE StudentId=@StudentId
+				END
+	  END
+END
+
