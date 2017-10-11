@@ -42,12 +42,12 @@ public class dbQueryFunctions {
     public static String ExecuteScalarQuery(String sqlString,String...args)
     {
        try{
-            Statement statement=c.createStatement();
+          //  Statement statement=c.createStatement();
             PreparedStatement pStatement=c.prepareStatement(sqlString);
             for(int i=0;i<=args.length-1;i++) {
             	pStatement.setString(i+1, args[i]);
             }
-            ResultSet rs=statement.executeQuery(sqlString);
+            ResultSet rs=pStatement.executeQuery();
             String returnStr="";
             while(rs.next()){
                     returnStr = (rs.getString(1) == null) ? "" : rs.getString(1);

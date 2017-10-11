@@ -8,9 +8,7 @@ import java.sql.*;
 public class dbConnection {
 	
 public Connection dbConn(){
-
    final String dbConnectionString="jdbc:sqlserver://localhost;user=sa;password=root;database=MyGrades";
-
 	try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		

@@ -24,7 +24,12 @@ public class Student {
 		this.LastName=LastName;
 		this.Major=Major;
 	}
-	
+	/*
+	 * Defined the Getters and Setters
+	 * */
+	public String getStudentName(String StudentName) {
+		return StudentName;
+	}
 	public void Actions(int userSelectedOption) {
 		switch(userSelectedOption) {
 		case 0:
