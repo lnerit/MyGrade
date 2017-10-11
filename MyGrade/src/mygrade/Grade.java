@@ -19,7 +19,6 @@ public class Grade {
 	private String StudentId="",CourseCode="",Grade="F";
 	private int Year=0,Semester=0;
 	
-	private int Points=0,Level=0;
 	dbConnection dbCon=new dbConnection();
 	Connection c=dbCon.dbConn();
 	

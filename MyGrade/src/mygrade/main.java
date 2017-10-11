@@ -88,8 +88,6 @@ public class main {
 	
 	public static void main(String[] args) {
 		//Call the database connection and check the status
-		dbQueryFunctions q=new dbQueryFunctions();
-		dbConnection c=new dbConnection();
 		ActionPrompts();
 
 		String input="6";
@@ -98,7 +96,7 @@ public class main {
 			//Take input for MAIN MENU options
 			Scanner scanner=new Scanner(System.in);
 			 input = scanner.nextLine();
-			 
+			 scanner.close();
 			 //If non of the numbers other than the options given a entered then,the user is prompted to enter again.
 			 if(!isDigit(input.toString())){
 				 System.out.println("PLEASE ENTER ONE OF THE FOLLOWING OPTIONS ONLY [1,2,3,4,5,6]");
@@ -258,7 +256,7 @@ public class main {
 						 
 						 Scanner courseOption=new Scanner(System.in);
 						 cInput = courseOption.nextLine();
-						 
+						 courseOption.close();
 						 if(!isDigit(cInput)){
 							 System.out.println("PLEASE ENTER ONE OF THE FOLLOWING OPTIONS ONLY [0,1,2,3,4]");
 							 continue c;
@@ -285,7 +283,7 @@ public class main {
 								 Scanner sCourseName=new Scanner(System.in);
 								 coursename=sCourseName.nextLine();
 								 
-								 c1:
+								
 								 System.out.print("Enter Points:");
 								 Scanner sPoints=new Scanner(System.in);
 								 String s="";
@@ -402,7 +400,7 @@ public class main {
 						 
 						 Scanner gradeOption=new Scanner(System.in);
 						 gInput = gradeOption.nextLine();
-						 
+						 gradeOption.close();
 						 if(!isDigit(gInput)){
 							 System.out.println("PLEASE ENTER ONE OF THE FOLLOWING OPTIONS ONLY [0,1,2,3,4]");
 							 continue d;
@@ -507,7 +505,7 @@ public class main {
 								 }
 								 break;
 							 case 2://update grade record
-								 String ugstudentid="",ugcoursecode="",ugyear="",ugsemester,uggrade="";
+								 String ugstudentid="";
 								 //Take inputs from user for input into student stable
 								 System.out.print("Enter Student ID:");
 								 Scanner ugStudentId=new Scanner(System.in);
@@ -628,6 +626,7 @@ public class main {
 						 Scanner dStdId=new Scanner(System.in);
 						 while(true) {
 							 dStdid=dStdId.nextLine();
+							 dStdId.close();
 							 if(dbQueryFunctions.isRecordExist(sidPrepareStatement,dStdid)) {
 									break;
 								}else {

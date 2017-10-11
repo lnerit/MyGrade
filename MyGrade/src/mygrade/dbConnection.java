@@ -5,7 +5,6 @@
  */
 package mygrade;
 import java.sql.*;
-import java.io.*;
 public class dbConnection {
 	
 public Connection dbConn(){

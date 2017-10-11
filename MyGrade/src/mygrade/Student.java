@@ -9,7 +9,7 @@
 package mygrade;
 import java.sql.*;
 public class Student {
-	//private int selectedOption;
+
 	private String StudentId,FirstName,LastName,Major;
 	dbConnection dbCon=new dbConnection();
 	Connection c=dbCon.dbConn();
