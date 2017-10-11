@@ -12,9 +12,6 @@ import java.util.Scanner;
 public class main {
 	
 	private static void ActionPrompts() {
-		
-			//Runtime.getRuntime().exec("CLS");
-			
 		System.out.println("|***************MAIN MENU*************|");
 		System.out.println("|-------------------------------------|");
 		System.out.println("| 1 ==>  STUDENT INFORMATION          |");
@@ -28,8 +25,6 @@ public class main {
 		
 	}
 	private static void ActionPromptStudent() {
-	
-			//Runtime.getRuntime().exec("cmd");
 		System.out.println("|*******STUDENT RECORDS MENU*********|");
 		System.out.println("|------------------------------------|");
 		System.out.println("| 0 ==> VIEW ALL STUDENT RECORDS     |");
@@ -40,7 +35,6 @@ public class main {
 		System.out.println("**************************************");
 		System.out.print("Enter input: ");
 	
-		
 	}
 	private static void ActionPromptCourse() {
 		
@@ -59,7 +53,6 @@ public class main {
 	
 	private static void ActionPromptGrade() {
 		
-		//Runtime.getRuntime().exec("CLS");
 		System.out.println("|*******STUDENT-GRADE RECORDS MENU*********|");
 		System.out.println("|------------------------------------|");
 		System.out.println("| 0 ==> VIEW ALL GRADE RECORDS       |");
@@ -655,7 +648,7 @@ public class main {
 						break;
 						
 				case 5:
-					System.out.print("Case 5 comes here");
+					System.out.print("Case 5 comes here...Not implemented yet");
 					break;
 				case 6:
 					System.out.println("THANK YOU FOR USING MyGrade App...BYE BYE!");
@@ -665,7 +658,7 @@ public class main {
 				}
 			}
 			
-		}while(input.toString()=="6");
+		}while(input.toString()!="6");
 
 	}
 
