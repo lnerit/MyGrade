@@ -7,9 +7,12 @@
  */
 package mygrade;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class main {
+	
 	
 	private static void ActionPrompts() {
 		System.out.println("|***************MAIN MENU*************|");
@@ -64,6 +67,18 @@ public class main {
 		System.out.print("Enter input: ");
 	}
 	
+private static void ActionPromptProgram() {
+		
+		System.out.println("|*******PROGRAM RECORDS MENU*********|");
+		System.out.println("|------------------------------------|");
+		System.out.println("| 0 ==> VIEW ALL PROGAM RECORDS       |");
+		System.out.println("| 1 ==> INSERT NEW  PROGRAM RECORD     |");
+		System.out.println("| 2 ==> UPDATE PROGRAM RECORD          |");
+		System.out.println("| 3 ==> DELETE PROGRAM RECORD          |");
+		System.out.println("| 4 ==> EXIT TO MAIN MENU            |");
+		System.out.println("**************************************");
+		System.out.print("Enter input: ");
+	}
 	static String sidPrepareStatement="SELECT COUNT(*) FROM Student WHERE StudentId=?";
 	static String courseCodePrepareStatement="SELECT COUNT(*) FROM Courses WHERE CourseCode=?";
 	static String programCodePreparedStatment="SELECT COUNT(*) FROM Program WHERE ProgramCode=?";
@@ -86,17 +101,17 @@ public class main {
 		return false;
 	}
 	
-	public static void main(String[] args) {
-		//Call the database connection and check the status
-		ActionPrompts();
 
+     
+	public static void main(String[] args) {
+
+		ActionPrompts();
 		String input="6";
 		a:
 		do {
 			//Take input for MAIN MENU options
 			Scanner scanner=new Scanner(System.in);
 			 input = scanner.nextLine();
-			 scanner.close();
 			 //If non of the numbers other than the options given a entered then,the user is prompted to enter again.
 			 if(!isDigit(input.toString())){
 				 System.out.println("PLEASE ENTER ONE OF THE FOLLOWING OPTIONS ONLY [1,2,3,4,5,6]");
@@ -256,7 +271,7 @@ public class main {
 						 
 						 Scanner courseOption=new Scanner(System.in);
 						 cInput = courseOption.nextLine();
-						 courseOption.close();
+						 
 						 if(!isDigit(cInput)){
 							 System.out.println("PLEASE ENTER ONE OF THE FOLLOWING OPTIONS ONLY [0,1,2,3,4]");
 							 continue c;
@@ -400,7 +415,7 @@ public class main {
 						 
 						 Scanner gradeOption=new Scanner(System.in);
 						 gInput = gradeOption.nextLine();
-						 gradeOption.close();
+						 
 						 if(!isDigit(gInput)){
 							 System.out.println("PLEASE ENTER ONE OF THE FOLLOWING OPTIONS ONLY [0,1,2,3,4]");
 							 continue d;
@@ -626,7 +641,7 @@ public class main {
 						 Scanner dStdId=new Scanner(System.in);
 						 while(true) {
 							 dStdid=dStdId.nextLine();
-							 dStdId.close();
+							 
 							 if(dbQueryFunctions.isRecordExist(sidPrepareStatement,dStdid)) {
 									break;
 								}else {
@@ -647,7 +662,31 @@ public class main {
 						break;
 						
 				case 5:
-					System.out.print("Case 5 comes here...Not implemented yet");
+					String pInput="4";
+					x:
+					do {
+					ActionPromptProgram();
+					 
+					 Scanner sProgram=new Scanner(System.in);
+					 gInput = sProgram.nextLine();
+					 
+					 if(!isDigit(pInput)){
+						 System.out.println("PLEASE ENTER ONE OF THE FOLLOWING OPTIONS ONLY [0,1,2,3,4]");
+						 continue x;
+					  }
+					 switch(Integer.parseInt(pInput)) {
+						 case 1:
+							 
+							 break;
+						 case 2:
+							 break;
+						 case 3:
+							 break;
+						 case 4:
+							 break;
+					 }
+					}
+					 while(!pInput.equals("4"));
 					break;
 				case 6:
 					System.out.println("THANK YOU FOR USING MyGrade App...BYE BYE!");

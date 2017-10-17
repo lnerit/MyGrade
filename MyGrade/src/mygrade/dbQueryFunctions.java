@@ -111,7 +111,15 @@ public class dbQueryFunctions {
 		}
 		return null;
     }
-    
+    private static String ScanForQuoteInString(String inputStr) {
+		String modifiedString=inputStr;
+		for(int i=0;i<modifiedString.length();i++) {
+			if(modifiedString.charAt(i)=='\'') {
+				return modifiedString.replace("'","''");
+			}
+		}
+		return inputStr;
+	}
     public static void ExecuteNonQuerySql(String sqlString,String... args)
     {
         try
