@@ -10,7 +10,7 @@ Create Table Student(
 	StudentId varchar(10) PRIMARY KEY,
 	FirstName varchar(50),
 	LastName varchar(50),
-	Major varchar(8) FOREIGN KEY REFERENCES Program(ProgramCode),
+	Major varchar(8) FOREIGN KEY REFERENCES Program(ProgramCode)
 )
 
 create table Courses(
@@ -28,8 +28,7 @@ We need to know which semester a course is offered
 CREATE TABLE SemesterCourse(
 	CourseCode varchar(10) FOREIGN KEY REFERENCES Courses(CourseCode) ON DELETE CASCADE ON UPDATE CASCADE,
 	Semester int,
-	PRIMARY KEY(CourseCode,Semester),
-	
+	PRIMARY KEY(CourseCode,Semester)
 );
 
 /*
